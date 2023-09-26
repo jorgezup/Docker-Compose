@@ -3,15 +3,19 @@ version: '3'
 services:
   app:
     build:
-      context: ./src
+      context: .
       dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "3000:3000"
     tty: true
+    volumes:
+      - ./src:/app
     networks:
       - app-network
-    depends_on:
-      - db
+    command: npm start
   db:
     image: mysql:5.7
     restart: always
@@ -19,6 +23,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: nodedb
+    healthcheck: 
+      test: ["CMD-SHELL", "mysqladmin -h 'localhost' -u root -proot ping --silent"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
     volumes:
       - ./mysql:/var/lib/mysql
     ports:
