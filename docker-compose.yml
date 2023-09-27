@@ -5,17 +5,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
     depends_on:
       - db
-    ports:
-      - "3000:3000"
     tty: true
     volumes:
       - ./src:/app
     networks:
       - app-network
-    command: npm start
+    command: "node index.js"
+
   db:
     image: mysql:5.7
     restart: always
@@ -26,10 +25,9 @@ services:
       MYSQL_DATABASE: nodedb
     volumes:
       - ./mysql:/var/lib/mysql
-    ports:
-      - "3306:3306"
     networks:
       - app-network
+
   nginx:
     image: nginx
     ports:
