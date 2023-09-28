@@ -10,7 +10,7 @@ services:
       - db
     tty: true
     volumes:
-      - ./src:/app
+      - ./src:/usr/src/app
     networks:
       - app-network
     command: "npm start"

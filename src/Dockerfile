@@ -1,12 +1,12 @@
 FROM node
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
-RUN npm install -g nodemon
+COPY . .
 
 ENV DOCKERIZE_VERSION v0.7.0
 
