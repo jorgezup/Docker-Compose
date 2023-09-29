@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY ./src/package*.json ./
 
-RUN npm i
+RUN npm ci && npm cache clean --force
 
 ENV DOCKERIZE_VERSION v0.7.0
 
@@ -14,5 +14,7 @@ RUN apt-get update \
     && apt-get autoremove -yqq --purge wget && rm -rf /var/lib/apt/lists/*
 
 RUN npm i -g nodemon
+
+COPY ./src .
 
 CMD ["npm", "start"]
