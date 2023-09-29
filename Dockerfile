@@ -7,5 +7,6 @@ RUN apt-get update \
     && apt-get autoremove -yqq --purge wget && rm -rf /var/lib/apt/lists/*
 COPY ./src/package*.json ./
 RUN npm install
+RUN npm install -g nodemon
 COPY . .
 CMD [ "npm", "start" ]
