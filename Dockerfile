@@ -1,5 +1,5 @@
 FROM node:20
-WORKDIR /app
+WORKDIR /usr/src/app
 ENV DOCKERIZE_VERSION v0.7.0
 RUN apt-get update \
     && apt-get install -y wget \
