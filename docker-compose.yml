@@ -3,8 +3,8 @@ version: '3'
 services:
   app:
     build: .
-    # depends_on:
-    #   - db
+    depends_on:
+      - db
     tty: true
     volumes:
       - ./src:/app
@@ -12,18 +12,18 @@ services:
     networks:
       - app-network
 
-  # db:
-  #   image: mysql:5.7
-  #   restart: always
-  #   command: --innodb-use-native-aio=0
-  #   tty: true
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: root
-  #     MYSQL_DATABASE: nodedb
-  #   volumes:
-  #     - ./mysql:/var/lib/mysql
-  #   networks:
-  #     - app-network
+  db:
+    image: mysql:5.7
+    restart: always
+    command: --innodb-use-native-aio=0
+    tty: true
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nodedb
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - app-network
 
   nginx:
     image: nginx
