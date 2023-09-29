@@ -1,5 +1,5 @@
 FROM node:20
-WORKDIR /usr/src/app
+WORKDIR /app
 ENV DOCKERIZE_VERSION v0.7.0
 RUN apt-get update \
     && apt-get install -y wget \
@@ -7,4 +7,3 @@ RUN apt-get update \
     && apt-get autoremove -yqq --purge wget && rm -rf /var/lib/apt/lists/*
 COPY ./src .
 EXPOSE 3000
-CMD [ "npm", "start" ]
