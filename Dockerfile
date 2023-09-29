@@ -6,7 +6,6 @@ RUN apt-get update \
     && wget -O - https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz | tar xzf - -C /usr/local/bin \
     && apt-get autoremove -yqq --purge wget && rm -rf /var/lib/apt/lists/*
 COPY src/package*.json .
-USER node
 RUN npm install
 COPY src .
 EXPOSE 3000
