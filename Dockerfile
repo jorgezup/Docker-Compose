@@ -6,8 +6,6 @@ COPY ./src/package*.json ./
 
 RUN npm i
 
-COPY ./src .
-
 ENV DOCKERIZE_VERSION v0.7.0
 
 RUN apt-get update \
